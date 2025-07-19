@@ -114,11 +114,11 @@ if __name__ == "__main__":
     data = data.sample(len(data), random_state=0)
     transform = standardscaler()
 
-    lr = LinearRegression(alpha=0.0000001, times=200000)
+    lr = LinearRegression(alpha=0.0005, times=2000)
 
-    train_x = data.iloc[:400, :-1]
+    train_x = data.iloc[:400, 5:6]
     train_y = data.iloc[:400:, -1]
-    test_x = data.iloc[400:, :-1]
+    test_x = data.iloc[400:, 5:6]
     test_y = data.iloc[400:, -1]
     train_x = transform.fit_transform(train_x)
     test_x = transform.transform(test_x)
@@ -128,10 +128,27 @@ if __name__ == "__main__":
 
     mpl.rcParams["font.family"] = "SimHei"
     mpl.rcParams["axes.unicode_minus"] = False
+    plt.figure(figsize=(8, 4))
+    plt.subplot(1, 3, 1)
     plt.plot(result, "ro-", label="预测值", marker="*")
     plt.plot(test_y.values, "go--", label="真实值", marker=">")
     plt.title("波士顿房价预测")
     plt.xlabel("节点序号")
     plt.ylabel("房价")
+    plt.legend(loc="best")
+    plt.subplot(1, 3, 2)
+    plt.plot(range(1, lr.times + 1), lr.loss_, "o-", label="loss")
+    plt.title("loss")
+    plt.xlabel("time")
+    plt.ylabel("loss")
+    plt.legend(loc="best")
+    plt.subplot(1, 3, 3)
+    plt.scatter(train_x, train_y, color="r", label="实际数据")
+    x = np.arange(-5, 5, 0.1)
+    y = lr.w_[0] + lr.w_[1] * x
+    plt.plot(x, y, label="训练结果")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.title("模型训练拟合")
     plt.legend(loc="best")
     plt.show()
