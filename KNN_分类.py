@@ -101,6 +101,7 @@ class KNN:
             np.sum() 数组求和函数，axis用于设置求和方向
             np.sqrt() 数组开方函数
             np.array() 创建一个ndarray数组对象
+            np.concatenate() 将二维数组进行拼接
             np.zeros() 创建全0数组
             np.bincount() 对数组中的元素进行计数，数组元素非负
             array.shape 返回一个一维数组
