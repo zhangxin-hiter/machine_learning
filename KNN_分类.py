@@ -102,6 +102,7 @@ class KNN:
             np.sqrt() 数组开方函数
             np.array() 创建一个ndarray数组对象
             np.concatenate() 将二维数组进行拼接
+            np.random.randint() 生成一个在指定范围中的随机数
             np.zeros() 创建全0数组
             np.bincount() 对数组中的元素进行计数，数组元素非负
             array.shape 返回一个一维数组
