@@ -298,12 +298,23 @@ if __name__ == "__main__":
     train_x, test_x, train_y, test_y = train_test_split(X, y.T, random_state=22)
 
     # 训练模型
-    snn = Regression_SNN(data.data.shape[1], hidden_size=100, times=200000, alpha=0.000001)
+    snn = Regression_SNN(data.data.shape[1], hidden_size=65, times=4000, alpha=0.000003)
     snn.fit(train_x.T, train_y.T)
     result = snn.predict(test_x.T)
-    
-    plt.plot(result.flatten(), "ro-")
-    plt.plot(test_y.flatten(), "go-")
+    mpl.rcParams["font.family"] = "SimHei"
+    mpl.rcParams["axes.unicode_minus"] = False
+    plt.subplot(1, 2, 1)
+    plt.plot(result.flatten(), "ro-", label="预测值")
+    plt.plot(test_y.flatten(), "go-", label="真实值")
+    plt.title("回归分析")
+    plt.xlabel("节点序号")
+    plt.ylabel("目标值")
+    plt.legend(loc="best")
+    plt.subplot(1, 2, 2)
+    plt.plot(np.arange(0, snn.times), snn.loss_, color="b")
+    plt.title("损失函数")
+    plt.xlabel("迭代次数")
+    plt.ylabel("损失值")
     plt.show()
 
     
