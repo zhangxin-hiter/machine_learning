@@ -183,9 +183,9 @@ class Regression_SNN:
         self.input_size = input_size
         self.loss_ = []
 
-        self.w1_ = np.random.randn(self.hidden_size, self.input_size)
+        self.w1_ = np.random.randn(self.hidden_size, self.input_size) * self.alpha
         self.b1_ = np.zeros((self.hidden_size, 1))
-        self.w2_ = np.random.randn(1, self.hidden_size)
+        self.w2_ = np.random.randn(1, self.hidden_size) * self.alpha
         self.b2_ = np.zeros((1, 1))
 
     def relu(self, z):
